@@ -1,0 +1,12 @@
+# The USBASP doesn't show up in the /dev folder
+# --- ie. DON'T expect /dev/ttyUSB0 to exist.
+# --- And don't setup udev rules to make ttyUSB0 appear, it doesn't work
+#
+# Instead avrdude knows the vendorID and productID and communicates directly with the USBASP programmer
+
+# For example	(remember to use sudo)
+# --- To read the device EEPROM using the USBASP use the following
+avrdude -p m8 -c usbasp -U eeprom::r:myfile.hex:i	# m8 is the processor, here atmega8
+
+# --- To read the device FLASH using the USBASP use the following
+avrdude -p m8 -c usbasp -U flash::r:myfile.hex:i

@@ -1,0 +1,19 @@
+# To compile programs for AVR's use avr-gcc
+avr-gcc -mmcu=atmega8 -Wall -Os -o blink.elf main.c
+# --- -mmcu=atmega8 specifies the MCU model
+# --- -Os means optimization level 0, this is needed for avr delay
+
+# To convert the elf tile to Intel hex for avrdude use:
+avr-objcopy -j .text -j .data -O ihex blink.elf blink.hex
+
+# Then to program use avrdude
+avrdude -p m8 -c usbasp -e -U flash:w:blink.hex
+# --- -p m8 specifies the MCU, here atmega8
+# --- -e means erase
+# --- -U means memory type
+# --- :w means write
+# --- "-e -U flash:w:blink.hex" specifies flash memory + erase option, and write blink.hex (:w:blink.hex)
+
+
+# More thorough guide
+# --- https://www.micahcarrick.com/getting-started.html
