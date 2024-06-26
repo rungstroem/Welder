@@ -3,6 +3,11 @@
 #include <avr/io.h>
 #include <util/delay.h>
 
+
+int adc_read_value(){
+	return 100;
+}
+
 int main (void) {
 	DDRD |= (1<<PD7);
 	DDRD |= (1<<PD4);
