@@ -93,8 +93,13 @@ int main (void) {
 		//PORTC ^= (1<<PC0);
 		//PORTB ^= (1<<PB2);
 		if( (PINB & (1 << PB0)) ){
-			set_wirefeed_speed(0x0000);
+			PORTD |= (1 << PD4);	//Disable gas solenoid
+			PORTC |= (1 << PC0);	//Disable transformer
+			set_wirefeed_speed(0x0000);	//Set wirefeed = 0
 		}else{
+			PORTC &= ~(1 << PC0);	//Enable transformer
+			PORTD &= ~(1 << PD4);	//Enable gas solenoid
+			_delay_ms(600);
 			set_wirefeed_speed(adc_read_value());
 		}
     }
