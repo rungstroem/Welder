@@ -1,0 +1,3 @@
+### Install
+# avr-libc for avr/io.h
+# pacman -S avr-libc
